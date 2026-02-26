@@ -56,7 +56,7 @@ type option struct {
 
 type optionFunc func(*option)
 
-type slogger struct {
+type Slogger struct {
 	handlers []slog.Handler
 	async    bool
 }
@@ -91,15 +91,15 @@ func WithMaxAge(maxAge int) optionFunc {
 	}
 }
 
-func NewSlogger(opts ...optionFunc) *slogger {
-	return &slogger{
+func NewSlogger(opts ...optionFunc) *Slogger {
+	return &Slogger{
 		handlers: createHandlers(opts...),
 		async:    false,
 	}
 }
 
-func NewAsyncSlogger(opts ...optionFunc) *slogger {
-	return &slogger{
+func NewAsyncSlogger(opts ...optionFunc) *Slogger {
+	return &Slogger{
 		handlers: createHandlers(opts...),
 		async:    true,
 	}
@@ -147,7 +147,7 @@ func createHandlers(opts ...optionFunc) []slog.Handler {
 	return []slog.Handler{fileHandler, consoleHandler}
 }
 
-func (l *slogger) log(level slog.Level, msg string, attrs ...slog.Attr) {
+func (l *Slogger) log(level slog.Level, msg string, attrs ...slog.Attr) {
 	var pcs [1]uintptr
 	runtime.Callers(3, pcs[:])
 	record := slog.NewRecord(time.Now(), level, msg, pcs[0])
@@ -164,18 +164,18 @@ func (l *slogger) log(level slog.Level, msg string, attrs ...slog.Attr) {
 	}
 }
 
-func (l *slogger) Debug(msg string, attrs ...slog.Attr) {
+func (l *Slogger) Debug(msg string, attrs ...slog.Attr) {
 	l.log(slog.LevelDebug, msg, attrs...)
 }
 
-func (l *slogger) Info(msg string, attrs ...slog.Attr) {
+func (l *Slogger) Info(msg string, attrs ...slog.Attr) {
 	l.log(slog.LevelInfo, msg, attrs...)
 }
 
-func (l *slogger) Warn(msg string, attrs ...slog.Attr) {
+func (l *Slogger) Warn(msg string, attrs ...slog.Attr) {
 	l.log(slog.LevelWarn, msg, attrs...)
 }
 
-func (l *slogger) Error(msg string, attrs ...slog.Attr) {
+func (l *Slogger) Error(msg string, attrs ...slog.Attr) {
 	l.log(slog.LevelError, msg, attrs...)
 }

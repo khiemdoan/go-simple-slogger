@@ -1,10 +1,13 @@
 module github.com/khiemdoan/go-simple-slogger
 
-go 1.24
+go 1.25.0
 
 require (
-	github.com/DeRuina/timberjack v1.3.4
-	gitlab.com/greyxor/slogor v1.6.2
+	github.com/DeRuina/timberjack v1.3.9
+	gitlab.com/greyxor/slogor v1.6.7
 )
 
-require golang.org/x/sys v0.32.0 // indirect
+require (
+	github.com/klauspost/compress v1.17.11 // indirect
+	golang.org/x/sys v0.41.0 // indirect
+)
