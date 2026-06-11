@@ -26,7 +26,7 @@ var (
 )
 
 func init() {
-	pipe = make(chan pack)
+	pipe = make(chan pack, 100)
 	go asyncHandle()
 }
 
