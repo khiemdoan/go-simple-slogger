@@ -8,6 +8,6 @@ require (
 )
 
 require (
-	github.com/klauspost/compress v1.17.11 // indirect
+	github.com/klauspost/compress v1.18.7 // indirect
 	golang.org/x/sys v0.44.0 // indirect
 )
